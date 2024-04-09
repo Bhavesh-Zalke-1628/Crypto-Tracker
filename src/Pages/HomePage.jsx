@@ -9,9 +9,6 @@ const HomePage = () => {
                     <h1 className=' text-9xl leading-snug'>
                         Crypto
                     </h1>
-                    <div className=' absolute left-56 top-96  bg-yellow-500'>
-
-                    </div>
                     <span className=' text-9xl ml-52 '>
                         Tracker
                     </span>
