@@ -7,7 +7,9 @@ function Header() {
             <h1 className=' text-lg font-bold'>CryptoTracker <span className=' text-blue-300 text-4xl'>.</span></h1>
             <div>
                 <ul className=' flex gap-4'>
-                    <li>compre</li>
+                    <Link to='/compare'>
+                        <li>compare</li>
+                    </Link>
                     <Link to='/show'>
                         <li>show</li>
                     </Link>

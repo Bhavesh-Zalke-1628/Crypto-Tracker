@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { toast } from "react-hot-toast";
-
+import { toast } from 'react-hot-toast'
 const initialState = {
-    data: JSON.parse(localStorage.getItem('data')) || {}
+    coinData: localStorage.getItem('coinData') || []
 }
 
 
@@ -12,11 +11,12 @@ export const getCoinData = createAsyncThunk("/show", async () => {
     const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en')
     console.log(response.data)
     toast.promise(response, {
-        loading: "Wait",
-        success: "Suuce",
+        loading: "wail",
+        success: "Suucess",
         error: "Failed"
     })
-    return response.data
+    console.log(response.data)
+    return (await response).data
 })
 
 
@@ -26,12 +26,10 @@ const coinData = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getCoinData.fulfilled, (state, action) => {
-                console.log(action)
-                localStorage.setItem('data', action.payload)
-            })
-            .addCase(getCoinData.rejected, (state, action) => {
-                toast.error("Failed to load data")
+            .addCase(getCoinData.fulfilled, async (state, action) => {
+                // console.log(action.payload)
+                (localStorage.getItem('coinData'), action.payload)
+                state.coinData = [...action.payload]
             })
     }
 })
